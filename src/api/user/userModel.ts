@@ -47,8 +47,6 @@ export const UpdateUserSchema = z.object({
 export const GetUsersQuerySchema = z.object({
 	role: z.enum(["admin", "project_manager", "member"]).optional(),
 	search: z.string().optional(),
-	page: z.number().min(1).default(1),
-	limit: z.number().min(1).max(100).default(10),
 });
 
 // User profile with stats

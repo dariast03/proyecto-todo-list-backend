@@ -43,8 +43,8 @@ describe("userService", () => {
 	describe("findAll", () => {
 		it("should return all users", async () => {
 			// Arrange
-			const query = { page: 1, limit: 10 };
-			const mockResponse = { users: mockUsers, total: mockUsers.length };
+			const query = {};
+			const mockResponse = { users: mockUsers };
 			(userRepositoryInstance.findMany as Mock).mockReturnValue(mockResponse);
 
 			// Act
@@ -55,13 +55,13 @@ describe("userService", () => {
 			expect(result.success).toBeTruthy();
 			expect(result.message).toContain("Users retrieved successfully");
 			expect(result.data).not.toBeNull();
-			expect(result.data?.users).toEqual(mockUsers);
+			expect(result.data).toEqual(mockUsers);
 		});
 
 		it("should handle repository returning null", async () => {
 			// Arrange
-			const query = { page: 1, limit: 10 };
-			(userRepositoryInstance.findMany as Mock).mockReturnValue({ users: [], total: 0 });
+			const query = {};
+			(userRepositoryInstance.findMany as Mock).mockReturnValue({ users: [] });
 
 			// Act
 			const result = await userServiceInstance.getAllUsers(query);
@@ -70,12 +70,12 @@ describe("userService", () => {
 			expect(result.statusCode).toEqual(StatusCodes.OK);
 			expect(result.success).toBeTruthy();
 			expect(result.data).not.toBeNull();
-			expect(result.data?.users).toEqual([]);
+			expect(result.data).toEqual([]);
 		});
 
 		it("should handle errors for findAll", async () => {
 			// Arrange
-			const query = { page: 1, limit: 10 };
+			const query = {};
 			(userRepositoryInstance.findMany as Mock).mockRejectedValue(new Error("Database error"));
 
 			// Act

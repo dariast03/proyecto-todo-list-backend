@@ -33,19 +33,9 @@ export class UserService {
 	// Get all users with filters
 	async getAllUsers(query: GetUsersQuery) {
 		try {
-			const { users, total } = await this.userRepository.findMany(query);
+			const { users } = await this.userRepository.findMany(query);
 
-			const response = {
-				users,
-				pagination: {
-					page: query.page,
-					limit: query.limit,
-					total,
-					totalPages: Math.ceil(total / query.limit),
-				},
-			};
-
-			return ServiceResponse.success("Users retrieved successfully", response);
+			return ServiceResponse.success("Users retrieved successfully", users);
 		} catch (error) {
 			const errorMessage = `Error retrieving users: ${(error as Error).message}`;
 			logger.error(errorMessage);

@@ -6,8 +6,7 @@ import { db } from "@/utils/db";
 export class UserRepository {
 	// Get all users with filters
 	async findMany(query: GetUsersQuery) {
-		const { role, search, page, limit } = query;
-		const offset = (page - 1) * limit;
+		const { role, search } = query;
 		const whereConditions = [];
 
 		if (role) {
@@ -25,18 +24,9 @@ export class UserRepository {
 
 		const whereClause = whereConditions.length > 0 ? and(...whereConditions) : undefined;
 
-		const users = await db
-			.select()
-			.from(usersTable)
-			.where(whereClause)
-			.orderBy(desc(usersTable.createdAt))
-			.limit(limit)
-			.offset(offset);
+		const users = await db.select().from(usersTable).where(whereClause).orderBy(desc(usersTable.createdAt));
 
-		// Get total count
-		const [{ total }] = await db.select({ total: count() }).from(usersTable).where(whereClause);
-
-		return { users, total };
+		return { users };
 	}
 
 	// Get user by ID
