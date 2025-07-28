@@ -24,3 +24,7 @@ export const validateRequest = (schema: ZodSchema) => async (req: Request, res: 
 		res.status(serviceResponse.statusCode).send(serviceResponse);
 	}
 };
+
+export const handleServiceResponse = (serviceResponse: ServiceResponse<unknown>, res: Response) => {
+	res.status(serviceResponse.statusCode).send(serviceResponse);
+};
