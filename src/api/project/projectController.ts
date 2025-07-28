@@ -44,6 +44,7 @@ class ProjectController {
 	// Update project
 	public updateProject: RequestHandler = async (req: Request, res: Response) => {
 		const id = Number.parseInt(req.params.id as string, 10);
+		console.log("🚀 ~ ProjectController ~ req.body:", req.body);
 		const body = UpdateProjectSchema.parse(req.body);
 		const userId = req.user?.id || 1; // Default to user 1 for now
 
