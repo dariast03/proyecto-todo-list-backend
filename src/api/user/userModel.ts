@@ -11,8 +11,6 @@ export const UserSchema = z.object({
 	name: z.string(),
 	email: z.string().email(),
 	age: z.number(),
-	createdAt: z.date(),
-	updatedAt: z.date(),
 });
 
 // Input Validation for 'GET users/:id' endpoint

@@ -1,4 +1,6 @@
 import type { User } from "@/api/user/userModel";
+import { usersTable } from "@/db/schema";
+import { db } from "@/utils/db";
 
 export const users: User[] = [
 	{
@@ -6,21 +8,19 @@ export const users: User[] = [
 		name: "Alice",
 		email: "alice@example.com",
 		age: 42,
-		createdAt: new Date(),
-		updatedAt: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days later
 	},
 	{
 		id: 2,
 		name: "Robert",
 		email: "Robert@example.com",
 		age: 21,
-		createdAt: new Date(),
-		updatedAt: new Date(Date.now() + 5 * 24 * 60 * 60 * 1000), // 5 days later
 	},
 ];
 
 export class UserRepository {
 	async findAllAsync(): Promise<User[]> {
+		const users = await db.select().from(usersTable);
+		console.log("Getting all users from the database: ", users);
 		return users;
 	}
 

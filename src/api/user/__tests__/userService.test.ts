@@ -17,16 +17,12 @@ describe("userService", () => {
 			name: "Alice",
 			email: "alice@example.com",
 			age: 42,
-			createdAt: new Date(),
-			updatedAt: new Date(),
 		},
 		{
 			id: 2,
 			name: "Bob",
 			email: "bob@example.com",
 			age: 21,
-			createdAt: new Date(),
-			updatedAt: new Date(),
 		},
 	];
 

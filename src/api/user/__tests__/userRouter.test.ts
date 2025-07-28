@@ -79,6 +79,4 @@ function compareUsers(mockUser: User, responseUser: User) {
 	expect(responseUser.name).toEqual(mockUser.name);
 	expect(responseUser.email).toEqual(mockUser.email);
 	expect(responseUser.age).toEqual(mockUser.age);
-	expect(new Date(responseUser.createdAt)).toEqual(mockUser.createdAt);
-	expect(new Date(responseUser.updatedAt)).toEqual(mockUser.updatedAt);
 }
