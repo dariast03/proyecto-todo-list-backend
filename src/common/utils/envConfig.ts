@@ -12,9 +12,15 @@ const envSchema = z.object({
 
 	CORS_ORIGIN: z.string().url().default("http://localhost:8080"),
 
-	COMMON_RATE_LIMIT_MAX_REQUESTS: z.coerce.number().int().positive().default(1000),
+	COMMON_RATE_LIMIT_MAX_REQUESTS: z.coerce
+		.number()
+		.int()
+		.positive()
+		.default(1000),
 
 	COMMON_RATE_LIMIT_WINDOW_MS: z.coerce.number().int().positive().default(1000),
+
+	DATABASE_URL: z.string().min(10, "Invalid database URL"),
 });
 
 const parsedEnv = envSchema.safeParse(process.env);
